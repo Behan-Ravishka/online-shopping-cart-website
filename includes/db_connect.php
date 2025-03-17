@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "your_username";
-$password = "your_password";
+$username = "root";
+$password = "";
 $dbname = "auracart_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

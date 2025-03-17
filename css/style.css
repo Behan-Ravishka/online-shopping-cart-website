@@ -1,4 +1,12 @@
-/* css/style.css */
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
+    color: #212121;
+}
+
 #loading-screen {
     position: fixed;
     top: 0;
@@ -31,41 +39,111 @@
     100% { transform: scale(1); }
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #F5F5F5;
+#content {
+    display: none;
 }
 
-header, footer {
-    background-color: #673AB7;
+.main-content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.home-main section {
+    margin-bottom: 40px;
+}
+
+.home-main h2 {
+    color: #673AB7;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.hero {
+    background: linear-gradient(135deg, #673AB7, #9575CD);
     color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
 }
 
 .btn {
-    background-color: #673AB7;
-    color: white;
-    padding: 10px 20px;
+    background-color: #FFC107;
+    color: #212121;
+    padding: 12px 30px;
     border: none;
+    border-radius: 5px;
+    font-size: 1em;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.primary-btn {
-    background-color: #673AB7;
+.btn:hover {
+    background-color: #FFD54F;
 }
 
-/* responsive.css (Media queries) */
-@media (max-width: 768px) {
-    /* Styles for tablets and smartphones */
-    .product-grid {
-        grid-template-columns: 1fr;
+.product-grid, .offer-grid, .category-grid, .review-grid, .recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-grid .product, .offer-grid .offer, .category-grid .category, .review-grid .review, .recommendation-grid .recommendation {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product-grid .product:hover, .offer-grid .offer:hover, .category-grid .category:hover, .review-grid .review:hover, .recommendation-grid .recommendation:hover {
+    transform: translateY(-5px);
+}
+
+.product-grid img, .offer-grid img, .category-grid img, .recommendation-grid img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.offer-countdown {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
     }
 }
 
-@media (max-width: 480px) {
-    /* Styles for smartphones */
+/* Responsive styles */
+@media screen and (max-width: 768px) {
     .hero-content h1 {
-        font-size: 2em;
+        font-size: 2.5em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+
+    .btn {
+        padding: 10px 25px;
     }
 }

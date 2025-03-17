@@ -28,6 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
+
+        if ($conn->query($sql) === TRUE) {
+            echo "<script> showOfferPopup('Success','Product added to cart.'); </script>";
+        } else {
+            echo "<script> showOfferPopup('Error','Error adding product.'); </script>";
+        }
+
+        // cart_actions.php (after payment)
+$coins_earned = 10; // Example: 10 coins per purchase
+$sql = "UPDATE users SET coins = coins + $coins_earned WHERE id = $user_id";
+$conn->query($sql);
+$sql = "INSERT into coins_history(user_id, amount, description) VALUES ($user_id, $coins_earned, 'Purchase reward')";
+$conn->query($sql);
     }
     // Add other cart actions (remove, update) here...
 }
