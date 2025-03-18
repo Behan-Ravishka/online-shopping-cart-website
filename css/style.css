@@ -23,7 +23,7 @@ body {
 }
 
 .loading-logo {
-    width: 100px;
+    width: 180px;
     height: 100px;
     animation: pulse 2s infinite ease-in-out;
 }
@@ -122,17 +122,6 @@ body {
     margin-bottom: 20px;
 }
 
-@keyframes navLinkFade {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-
 /* Responsive styles */
 @media screen and (max-width: 768px) {
     .hero-content h1 {
@@ -146,4 +135,80 @@ body {
     .btn {
         padding: 10px 25px;
     }
+}
+
+/* Navigation animation (navLinkFade) */
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+/* Burger menu styles (added for completeness) */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .burger {
+        display: block;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Login and signup containers */
+.login-container, .signup-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h2, .signup-container h2 {
+    color: #673AB7;
+    margin-bottom: 20px;
+}
+
+.login-container input, .signup-container input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button, .signup-container button {
+    width: 100%;
 }

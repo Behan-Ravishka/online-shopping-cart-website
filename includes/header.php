@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include 'db_connect.php'; // Database connection
 ?>
 <header>
@@ -18,11 +20,22 @@ include 'db_connect.php'; // Database connection
                 <li><a href="profile.php" class="nav-link">Profile</a></li>
                 <li><a href="logout.php" class="nav-link">Logout</a></li>
             <?php } elseif (isset($_SESSION['admin_id'])) { ?>
-                <li><a href="admin/dashboard.php" class="nav-link">Admin Panel</a></li>
                 <li><a href="logout.php" class="nav-link">Logout</a></li>
             <?php } else { ?>
-                <li><a href="login.php" class="nav-link">Login</a></li>
-                <li><a href="signup.php" class="nav-link">Signup</a></li>
+                <li class="dropdown">
+                    <a href="login.php" class="nav-link">Login</a>
+                    <div class="dropdown-content">
+                        <a href="login.php">User Login</a>
+                        <a href="admin/login.php">Admin Login</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="signup.php" class="nav-link">Signup</a>
+                    <div class="dropdown-content">
+                        <a href="signup.php">User Signup</a>
+                        <a href="admin/signup.php">Admin Signup</a>
+                    </div>
+                </li>
             <?php } ?>
         </ul>
         <div class="burger">
@@ -33,6 +46,7 @@ include 'db_connect.php'; // Database connection
     </nav>
 </header>
 <link rel="stylesheet" href="css/style.css">
+<script src="js/script.js"></script>
 
 <style>
 /* header styles */
@@ -154,27 +168,49 @@ header {
         transform: translateX(0px);
     }
 }
-</style>
 
-<script>
-    const navSlide = () => {
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
-        const navLinks = document.querySelectorAll('.nav-links li');
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('nav-active');
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #673AB7;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
 
-            navLinks.forEach((link, index) => {
-                if (link.style.animation) {
-                    link.style.animation = '';
-                } else {
-                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                }
-            });
-            burger.classList.toggle('toggle');
-        });
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Burger menu dropdown styles */
+@media screen and (max-width: 768px) {
+    .nav-links .dropdown-content {
+        position: static;
+        background-color: transparent;
+        box-shadow: none;
+        width: 100%;
     }
 
-    navSlide();
-</script>
+    .nav-links .dropdown-content a {
+        padding: 10px 20px;
+    }
+}
+
+</style>
