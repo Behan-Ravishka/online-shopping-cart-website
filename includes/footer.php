@@ -23,7 +23,7 @@
         <div class="footer-section">
             <h4>Contact Us</h4>
             <p>Email: <a href="mailto:info@auracart.com" class="footer-contact-link">info@auracart.com</a></p>
-            <p>Phone: +1 123 456 7890</p>
+            <p>Phone: +94 23 456 7890</p>
         </div>
     </div>
     <div class="footer-bottom">
@@ -36,7 +36,7 @@
 footer {
     background-color: #372161; /* Darker variant of primary color */
     color: white;
-    padding: 40px 20px;
+    padding: 40px 20px 10px;
     font-size: 0.9em;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Shadow at the top */
 }
@@ -45,13 +45,14 @@ footer {
     display: flex;
     justify-content: space-around;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: -40px auto -20px;
     flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
 }
 
 .footer-section {
-    margin-bottom: 20px;
-    width: 280px; /* Adjust as needed */
+    margin-bottom: 80px;
+    width: 280px;
+    height: 50px;
 }
 
 .footer-section h4 {
@@ -89,7 +90,7 @@ footer {
 
 .footer-bottom {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     margin-top: 30px;
 }

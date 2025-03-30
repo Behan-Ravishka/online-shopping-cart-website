@@ -15,3 +15,32 @@
     ?>
 </main>
 <?php include 'includes/footer.php'; ?>
+
+<style>
+    .profile-main {
+        height: 320px; /* Adjusted to auto for dynamic content */
+        margin: 20px auto; /* Centered with auto margins */
+        max-width: 800px; /* Added max width for better readability */
+        padding: 20px;
+        background-color: rgba(103, 58, 181); /* Glass background */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        color: white; /* Text color for better visibility */
+    }
+
+    .profile-main h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #FFC107; /* Primary color for heading */
+    }
+
+    .profile-main p {
+        margin-bottom: 10px;
+        font-size: 1.1em;
+    }
+
+    /* Add more styles for order history, coins, coupons, etc. as needed */
+</style>

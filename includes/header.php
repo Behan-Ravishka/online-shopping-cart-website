@@ -26,14 +26,14 @@ include 'db_connect.php'; // Database connection
                     <a href="login.php" class="nav-link">Login</a>
                     <div class="dropdown-content">
                         <a href="login.php">User Login</a>
-                        <a href="admin/login.php">Admin Login</a>
+                        <a href="admin_login.php">Admin Login</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <a href="signup.php" class="nav-link">Signup</a>
                     <div class="dropdown-content">
                         <a href="signup.php">User Signup</a>
-                        <a href="admin/signup.php">Admin Signup</a>
+                        <a href="admin_signup.php">Admin Signup</a>
                     </div>
                 </li>
             <?php } ?>

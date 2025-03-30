@@ -22,8 +22,8 @@
         echo "Product not found.";
     }
     ?>
+    <?php include 'includes/footer.php'; ?>
 </main>
-<?php include 'includes/footer.php'; ?>
 
 <script>
     function addToCart(productId) {

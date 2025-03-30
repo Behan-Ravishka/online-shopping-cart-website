@@ -184,31 +184,3 @@ body {
 .toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
 }
-
-/* Login and signup containers */
-.login-container, .signup-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.login-container h2, .signup-container h2 {
-    color: #673AB7;
-    margin-bottom: 20px;
-}
-
-.login-container input, .signup-container input {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-container button, .signup-container button {
-    width: 100%;
-}

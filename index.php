@@ -20,7 +20,7 @@
                 <div class="hero-content">
                     <h1>Welcome to AuraCart</h1>
                     <p>Your ultimate online shopping destination.</p>
-                    <a href="products.php" class="btn primary-btn">Shop Now</a>
+                    <a href="products.php" class="btn primary-btn" style = "text-decoration : none">Shop Now</a>
                 </div>
             </section>
             <section class="featured-products">
