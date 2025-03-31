@@ -1,32 +1,50 @@
 <?php
 include 'db_connect.php';
 
-$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-$password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
 
-if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
+        // Check if the email already exists
+        $check_sql = "SELECT id FROM admins WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
 
-    $sql = "INSERT INTO admins (email, password) VALUES (?, ?)"; // Correct table
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $email, $password);
+        if ($check_stmt->num_rows > 0) {
+            echo "<div class='message-container error-message'><p>Email already exists. Please use a different email.</p></div>";
+            exit();
+        }
 
-    if ($stmt->execute()) {
-        echo "<div class='message-container success-message'><p>Admin signup successful! Redirecting to Admin login...</p></div>";
-        echo "<script>setTimeout(function(){ window.location.href = 'admin_login.php'; }, 1500);</script>";
+        $check_stmt->close();
+
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insert new admin
+        $sql = "INSERT INTO admins (email, password) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $email, $hashed_password);
+
+        if ($stmt->execute()) {
+            echo "<div class='message-container success-message'><p>Admin signup successful! Redirecting to Admin login...</p></div>";
+            echo "<script>setTimeout(function(){ window.location.href = 'admin_login.php'; }, 1500);</script>";
+        } else {
+            echo "<div class='message-container error-message'><p>Error: " . $stmt->error . "</p></div>";
+        }
+
+        $stmt->close();
     } else {
-        echo "<div class='message-container error-message'><p>Error: " . $stmt->error . "</p></div>";
+        echo "<div class='message-container error-message'><p>Invalid email or password.</p></div>";
     }
-
-    $stmt->close();
-} else {
-    echo "<div class='message-container error-message'><p>Invalid email or password.</p></div>";
 }
 
 $conn->close();
 ?>
 
 <style>
-    /* Message styles (same as login_process.php) */
     .message-container {
         padding: 20px;
         margin: 20px auto;

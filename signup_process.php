@@ -1,40 +1,54 @@
 <?php
+session_start();
 include 'db_connect.php';
 
-$name = $_POST['name'];
-$email = $_POST['email'];
-$password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
 
-// Basic input validation
-if (empty($name) || empty($email) || empty($password)) {
-    echo "<div class='message-container error-message'><p>Please fill in all fields.</p></div>";
-    exit;
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($name) && !empty($password)) {
+        // Check if the email already exists
+        $check_sql = "SELECT id FROM users WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            echo "Email already exists. Please use a different email.";
+            exit();
+        }
+
+        $check_stmt->close();
+
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insert new user
+        $sql = "INSERT INTO users (name, email, password, role, coins, coupons) VALUES (?, ?, ?, 'user', 0, NULL)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $name, $email, $hashed_password);
+
+        if ($stmt->execute()) {
+            echo "<div class='message-container success-message'><p>Signup successful! Redirecting to User login...</p></div>";
+            echo "<script>setTimeout(function(){ window.location.href = 'login.php'; }, 1500);</script>";
+        } else {
+            echo "<div class='message-container error-message'><p>Error: " . $stmt->error . "</p></div>";
+        }
+
+        $stmt->close();
+    } else {
+        echo "Invalid input. Please check your details.";
+    }
 }
 
-// Email validation
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "<div class='message-container error-message'><p>Invalid email format.</p></div>";
-    exit;
-}
-
-
-$sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')"; // Correct table
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("sss", $name, $email, $password);
-
-if ($stmt->execute()) {
-    echo "<div class='message-container success-message'><p>Signup successful! Redirecting to User login...</p></div>";
-    echo "<script>setTimeout(function(){ window.location.href = 'login.php'; }, 1500);</script>";
-} else {
-    echo "<div class='message-container error-message'><p>Error: " . $stmt->error . "</p></div>";
-}
-
-$stmt->close();
 $conn->close();
 ?>
 
+
 <style>
-    /* Message styles (same as login_process.php) */
+    /* Message styles */
     .message-container {
         padding: 20px;
         margin: 20px auto;

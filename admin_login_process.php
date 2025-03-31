@@ -18,7 +18,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['admin_id'] = $row['id'];
             echo "<div class='message-container success-message'>";
-            echo "<p>Admin Login Successful! Redirecting to dashboard...</p>";
+            echo "<p>Admin Login Successful! Redirecting to Admin dashboard...</p>";
             echo "</div>";
             echo "<script>
                 setTimeout(function() {
@@ -31,7 +31,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
             echo "<p>Invalid password.</p>";
             echo "<script>
                 setTimeout(function() {
-                    window.location.href = 'login.php';
+                    window.location.href = 'admin_login.php';
                 }, 1500);
             </script>";
             echo "</div>";
@@ -41,7 +41,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
         echo "<p>Invalid email.</p>";
         echo "<script>
                 setTimeout(function() {
-                    window.location.href = 'login.php';
+                    window.location.href = 'admin_login.php';
                 }, 1500);
             </script>";
         echo "</div>";

@@ -20,6 +20,7 @@ include 'db_connect.php'; // Database connection
                 <li><a href="profile.php" class="nav-link">Profile</a></li>
                 <li><a href="logout.php" class="nav-link">Logout</a></li>
             <?php } elseif (isset($_SESSION['admin_id'])) { ?>
+                <li><a href="dashboard.php" class="nav-link">Admin Dashboard</a></li>
                 <li><a href="logout.php" class="nav-link">Logout</a></li>
             <?php } else { ?>
                 <li class="dropdown">

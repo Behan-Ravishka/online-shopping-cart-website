@@ -13,7 +13,7 @@
         echo '<p>$' . $row['price'] . '</p>';
         echo '<p>' . $row['description'] . '</p>';
         if (isset($_SESSION['user_id'])){
-            echo '<button class="btn primary-btn" onclick="addToCart(' . $row['id'] . ')">Add to Cart</button>';
+            echo '<a href="add_to_cart.php?id=' . $row['id'] . '" class="btn primary-btn" style="text-decoration:none">Add to Cart</a>';
         } else {
             echo '<p>Please <a href="login.php">login</a> to add to cart.</p>';
         }
@@ -24,6 +24,12 @@
     ?>
     <?php include 'includes/footer.php'; ?>
 </main>
+
+<style>
+    .product-details{
+        padding: 120px;
+    }
+</style>
 
 <script>
     function addToCart(productId) {
